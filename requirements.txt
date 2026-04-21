@@ -1,0 +1,10 @@
+# Data processing
+beautifulsoup4
+lxml
+
+# Utilities
+python-dateutil
+langdetect
+
+# Web interface
+gradio
