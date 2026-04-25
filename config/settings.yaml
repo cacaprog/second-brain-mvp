@@ -16,6 +16,7 @@ ollama:
 ingestion:
   # Set above 1.0 to disable fast-track (calibration mode).
   fast_track_confidence: 0.85
+  rich_note_paragraph_threshold: 4
   # Lower threshold for LINK ONLY proposals — no new pages or cross-references.
   link_only_fast_track_confidence: 0.75
   duplicate_threshold: 0.90

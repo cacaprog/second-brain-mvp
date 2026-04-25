@@ -361,6 +361,7 @@ def render_knowledge_card_page(
     confidence: float,
     source_url: Optional[str] = None,
     edited_content: Optional[str] = None,
+    note_type: str = "article",
 ) -> str:
     """Render a full wiki page for an article knowledge card with structured body."""
     if edited_content:
@@ -387,7 +388,7 @@ def render_knowledge_card_page(
     front_matter: dict = {
         "slug": slug,
         "domain": domain,
-        "note_type": "article",
+        "note_type": note_type,
         "languages": languages,
         "created": created,
         "updated": today,

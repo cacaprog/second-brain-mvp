@@ -489,6 +489,59 @@ Press `r` on any entry to trigger a git revert (retroactive rejection).
 
 ## Part 4 — Ongoing Operations
 
+### Check ingestion completeness
+
+Use this to know whether every file has been fully processed and every note is in
+the wiki.
+
+**Quick dashboard (proposals + note statuses by domain):**
+
+```bash
+uv run python src/batch_ingest.py --status
+```
+
+**You are done when all three conditions are true:**
+
+| Status | Target | Meaning if non-zero |
+|--------|--------|---------------------|
+| `pending` / `ingested` | **0** | Files still waiting to be classified/proposed |
+| `commit_failed` | **0** | Pipeline errors — wiki write failed |
+| `classified` | 0 | Proposals waiting for your review (expected to be non-zero during active use) |
+
+`committed` and `rejected` are terminal states — nothing to do.
+
+**Raw SQL check:**
+
+```bash
+sqlite3 -column -header db/brain.sqlite "
+SELECT
+    n.source,
+    COUNT(*)                                                          AS total,
+    SUM(CASE WHEN n.status='committed'     THEN 1 ELSE 0 END)        AS committed,
+    SUM(CASE WHEN n.status='classified'    THEN 1 ELSE 0 END)        AS awaiting_review,
+    SUM(CASE WHEN n.status='commit_failed' THEN 1 ELSE 0 END)        AS failed,
+    SUM(CASE WHEN n.status IN ('pending','ingested') THEN 1 ELSE 0 END) AS in_progress,
+    SUM(CASE WHEN n.status='rejected'      THEN 1 ELSE 0 END)        AS rejected
+FROM notes n
+GROUP BY n.source
+ORDER BY total DESC;
+"
+```
+
+**Note on file count vs note count:** raw file counts will never match note counts.
+Kindle produces one note per book from a single `.txt` file; empty and config files
+are skipped silently. Do not use `find data/raw | wc -l` as a completeness check.
+
+**Resolving `commit_failed` notes:**
+
+```bash
+uv run python src/review_cli.py --errors
+# r = re-queue for fresh attempt   d = dismiss permanently
+```
+
+Once `commit_failed = 0`, `pending = 0`, `ingested = 0`, and the `classified` review
+queue is cleared — every sentence from every source file is in the wiki.
+
 ### Daily backup (set up cron)
 
 ```bash

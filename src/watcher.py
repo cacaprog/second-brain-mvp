@@ -110,6 +110,11 @@ def _parse_note(file_path: Path) -> list[NoteRecord]:
 # Pipeline steps
 # ---------------------------------------------------------------------------
 
+def _count_paragraphs(body: str) -> int:
+    import re
+    return len([p for p in re.split(r"\n{2,}", body) if p.strip()])
+
+
 def _process_record(note: NoteRecord, db, is_modify: bool = False) -> None:
     """Run a single NoteRecord through the full pipeline: dedup → classify → propose → route."""
     existing = db.get_note_by_path(note.source_path)
@@ -125,6 +130,11 @@ def _process_record(note: NoteRecord, db, is_modify: bool = False) -> None:
     if not note.body.strip():
         print(f"[SKIP]   {Path(note.source_path).name} — empty body, skipped")
         return
+
+    cfg = _load_settings()
+    threshold = cfg["ingestion"].get("rich_note_paragraph_threshold", 4)
+    if note.note_type not in ("article", "paper") and _count_paragraphs(note.body) >= threshold:
+        note.note_type = "rich_note"
 
     db.upsert_note(note)
     print(f"[PARSE]  {Path(note.source_path).name} lang={note.language} words={note.word_count}")
@@ -152,7 +162,7 @@ def _process_record(note: NoteRecord, db, is_modify: bool = False) -> None:
 
     # Propose
     try:
-        if note.note_type == "article":
+        if note.note_type in ("article", "rich_note"):
             import uuid as _uuid
             from datetime import datetime as _dt, timezone as _tz
             from ollama_agent import generate_knowledge_card, _slugify

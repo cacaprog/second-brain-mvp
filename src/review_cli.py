@@ -91,6 +91,7 @@ def _render_diff(proposal: Proposal, note: NoteRecord, existing: Optional[str]) 
     )
 
     flag = "NEW PAGE" if proposal.is_new_page else ("LINK ONLY" if proposal.link_only else "UPDATE")
+    rich_label = "  [bold green]RICH NOTE[/bold green]" if note.note_type == "rich_note" else ""
     console.print(Rule())
     console.print(
         f"[bold cyan]Proposal[/bold cyan]  "
@@ -98,6 +99,7 @@ def _render_diff(proposal: Proposal, note: NoteRecord, existing: Optional[str]) 
         f"[dim]{note.domain}[/dim]  "
         f"[yellow]conf: {proposal.confidence:.2f}[/yellow]  "
         f"[magenta]{flag}[/magenta]"
+        f"{rich_label}"
     )
     console.print(
         f"[dim]Note: {Path(note.source_path).name}  lang={note.language}  "
