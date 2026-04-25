@@ -575,6 +575,54 @@ uv run python src/query.py "O que é antifragilidade?" --domain philosophy
 uv run python src/query.py "Como vieses cognitivos afetam decisões financeiras?"
 ```
 
+### Rich note knowledge cards
+
+Notes from any source (Kindle, Notion, Keep, etc.) with **4 or more paragraphs** are
+automatically treated as rich notes and routed through the knowledge-card generation
+path — the same structured four-section format used for articles and papers. In the
+review TUI they show a green `RICH NOTE` label so you know the source is highlights,
+not a published article.
+
+The threshold is configurable without touching code:
+
+```yaml
+# config/settings.yaml
+ingestion:
+  rich_note_paragraph_threshold: 4   # increase to require more content before upgrading
+```
+
+**Check how many notes qualified as rich notes:**
+
+```bash
+sqlite3 -column -header db/brain.sqlite "
+SELECT
+    source,
+    COUNT(*) AS rich_notes,
+    SUM(CASE WHEN status='committed' THEN 1 ELSE 0 END) AS committed,
+    SUM(CASE WHEN status='classified' THEN 1 ELSE 0 END) AS awaiting_review
+FROM notes
+WHERE note_type='rich_note'
+GROUP BY source
+ORDER BY rich_notes DESC;
+"
+```
+
+**Tune the threshold if too many thin notes are getting knowledge-card treatment:**
+
+```bash
+# Edit the threshold, then re-ingest affected notes (optional — only new ingestion
+# picks up the new threshold; existing classified/committed notes are unaffected)
+# To force re-routing of pending rich notes, reset them:
+sqlite3 db/brain.sqlite "
+UPDATE notes SET status='pending', note_type=NULL
+WHERE note_type='rich_note' AND status='classified';
+DELETE FROM proposals
+WHERE note_id IN (SELECT id FROM notes WHERE note_type IS NULL AND status='pending')
+  AND decision IS NULL;
+"
+# Then re-run batch ingest or watcher --once
+```
+
 ### Clean and merge wiki pages
 
 Run these tools periodically to consolidate duplicate content across the wiki.
