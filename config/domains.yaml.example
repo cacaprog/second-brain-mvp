@@ -1,0 +1,129 @@
+domains:
+  analytics:
+    seeds:
+      - "MMM"
+      - "Robyn"
+      - "atribuição"
+      - "attribution"
+      - "churn"
+      - "funil"
+      - "funnel"
+      - "ROAS"
+      - "mídia paga"
+      - "paid media"
+      - "marketing mix"
+      - "incrementality"
+    max_pages: 300
+
+  philosophy:
+    seeds:
+      - "Taleb"
+      - "Hadot"
+      - "estoicismo"
+      - "stoicism"
+      - "antifragile"
+      - "antifragilidade"
+      - "Seneca"
+      - "via negativa"
+      - "Marcus Aurelius"
+      - "Epictetus"
+      - "filosofia"
+    max_pages: 350
+
+  data-science:
+    seeds:
+      - "regressão"
+      - "regression"
+      - "clustering"
+      - "survival analysis"
+      - "random forest"
+      - "feature engineering"
+      - "machine learning"
+      - "aprendizado de máquina"
+      - "gradient boosting"
+      - "neural network"
+    max_pages: 200
+
+  behavioral-economics:
+    seeds:
+      - "Kahneman"
+      - "Thaler"
+      - "nudge"
+      - "viés cognitivo"
+      - "cognitive bias"
+      - "heurística"
+      - "heuristic"
+      - "prospect theory"
+      - "loss aversion"
+      - "behavioral"
+    max_pages: 150
+
+  fiction:
+    seeds:
+      - "Tolkien"
+      - "worldbuilding"
+      - "narrative"
+      - "narrativa"
+      - "personagem"
+      - "character"
+      - "enredo"
+      - "plot"
+      - "fantasia"
+      - "fantasy"
+    max_pages: 150
+
+  neuroscience:
+    seeds:
+      - "neurociência"
+      - "neuroplasticity"
+      - "neuroplasticidade"
+      - "dopamine"
+      - "dopamina"
+      - "cortex"
+      - "cognition"
+      - "cognição"
+      - "memory"
+      - "memória"
+    max_pages: 120
+
+  personal:
+    seeds:
+      - "diário"
+      - "journal"
+      - "reflexão"
+      - "reflection"
+      - "meta"
+      - "goal"
+      - "hábito"
+      - "habit"
+      - "rotina"
+      - "routine"
+    max_pages: 200
+
+  marketing:
+    seeds:
+      - "brand"
+      - "marca"
+      - "positioning"
+      - "posicionamento"
+      - "copywriting"
+      - "conversion"
+      - "conversão"
+      - "SEO"
+      - "conteúdo"
+      - "content"
+    max_pages: 200
+
+  career:
+    seeds:
+      - "carreira"
+      - "career"
+      - "liderança"
+      - "leadership"
+      - "gestão"
+      - "management"
+      - "negociação"
+      - "negotiation"
+      - "produtividade"
+      - "productivity"
+    max_pages: 100

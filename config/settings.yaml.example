@@ -1,0 +1,55 @@
+paths:
+  raw_data: "data/raw"
+  wiki: "wiki"
+  chroma: "data/processed/chroma"
+  db: "db/brain.sqlite"
+  backup_dir: "db/backups"
+  batch_log: "batch_log.jsonl"
+  centroids: "config/centroids.pkl"
+
+ollama:
+  model: "qwen2.5:7b"
+  timeout_seconds: 60
+  min_confidence: 0.5
+
+ingestion:
+  # Set above 1.0 to disable fast-track during calibration sprint
+  fast_track_confidence: 1.01
+  duplicate_threshold: 0.90
+  link_only_word_threshold: 100
+  debounce_seconds: 1.0
+
+embeddings:
+  model: "intfloat/multilingual-e5-large"
+  fallback_model: "paraphrase-multilingual-MiniLM-L12-v2"
+  batch_size: 32
+  device: "cuda"
+
+reranker:
+  model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  cross_domain_candidates_per_domain: 10
+  device: "cuda"
+
+domains:
+  max_pages_per_domain: 300
+  config_file: "config/domains.yaml"
+
+lint:
+  structural_schedule: "daily"
+  semantic_schedule: "monthly"
+  semantic_lookback_days: 30
+  stale_days: 90
+  run_structural_after_n_commits: 10
+  page_max_words: 2000
+
+backup:
+  retention_days: 30
+
+languages:
+  supported: [pt, en, fr, es]
+
+mcp:
+  enabled: true
+  port: 8765
+  host: "localhost"
+  read_only: true

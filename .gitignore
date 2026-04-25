@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+.pytest_cache/
+
+# Data — large binaries and personal content
+db/*
+db/backups/
+
+# Wiki is a separate git repo
+wiki/
+
+# Config (may contain sensitive paths)
+config/centroids.pkl
+
+# Runtime
+batch_log.jsonl
+*.log
+*.tmp
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.env
+.env.local
+
+# Raw data files
+data/raw/
+data/processed/
+data/curated/
+
