@@ -225,6 +225,30 @@ A wiki inteira está versionada em git. Cada aprovação é um commit com o nome
 
 E tem mais: já tem um servidor MCP implementado. Isso significa que o Claude Code — a IA que uso no terminal — pode consultar diretamente a minha base de conhecimento enquanto trabalha comigo. O Second Brain virou um recurso para outros agentes de IA.
 ## Ato 7 — Como Melhorar (~1,5 min)
+
+> 🎯 **Objetivo:** O espectador vê o potencial futuro e entende que o sistema é uma plataforma — não um fim em si mesmo.
+
+[CENA: abrir o arquivo `second-brain-sdd.md` na seção "Future Work"]
+
+O que temos hoje é uma fundação. As direções mais promissoras para a próxima fase:
+
+[PAUSA]
+
+**Writing assistant.** As páginas do wiki são o contexto perfeito para escrever. A próxima feature é usar o wiki para rascunhar posts — ancorando cada parágrafo em conceitos já compilados, com citações automáticas. Nada escrito do zero; tudo construído sobre conhecimento acumulado.
+
+[PAUSA]
+
+**Auto-tagging no momento da captura.** Hoje você classifica a nota depois de capturar. O próximo passo é sugerir tags e domínio já no momento em que você escreve no Notion ou no Obsidian — com base no que já está no wiki.
+
+[PAUSA]
+
+**Calibração com as primeiras 500 notas.** O sistema foi projetado para rodar as primeiras 500 notas em modo manual — sem fast-track — para medir a taxa de rejeição por domínio e afinar os thresholds. Essa etapa ainda está pela frente.
+
+[PAUSA]
+
+**Fine-tuning no próprio wiki.** No longo prazo: treinar um modelo pequeno com as páginas compiladas. Em vez de um modelo genérico que propõe integrações para qualquer assunto, um modelo que conhece [ÊNFASE] especificamente o meu Zettelkasten.
+
+[CENA: fade suave — preparar para a conclusão]
 ## Ato 8 — Conclusão (~1 min)
 
 ---
