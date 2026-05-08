@@ -192,6 +192,38 @@ Na hora de consultar, a busca semântica encontra as páginas mais relevantes us
 
 E aqui está uma página real do wiki — com metadados estruturados, as fontes originais, os links para conceitos relacionados, e o texto sintetizado pelo LLM e aprovado por mim.
 ## Ato 6 — O Estado Atual (~1,5 min)
+
+> 🎯 **Objetivo:** Tornar o resultado concreto com números reais — o espectador vê que isso não é um projeto hipotético, é um sistema funcionando.
+
+[CENA: abrir o Obsidian com o vault do wiki — mostrar os 26 domínios na barra lateral]
+
+Então, onde estamos hoje?
+
+[PAUSA]
+
+**26 domínios de conhecimento** organizados: analytics, filosofia, psicologia, ciência de dados, neurociência, economia comportamental, ficção, marketing, liderança, história... cada um com seu próprio índice e suas próprias páginas compiladas.
+
+[CENA: navegar por alguns domínios no Obsidian — mostrar as páginas interligadas]
+
+**315 páginas de wiki** já compiladas. Cada uma sintetizando notas de múltiplas fontes, em múltiplos idiomas, com wikilinks aprovados por mim.
+
+**303 notas committed** — integradas ao wiki. Mais 450 classificadas e aguardando na fila de revisão.
+
+[PAUSA]
+
+[CENA: mostrar o `nvidia-smi` com o Qwen 3.5 9B usando a VRAM do RTX 3060]
+
+Tudo isso rodando 100% localmente no meu RTX 3060, com o modelo Qwen 3.5 9B via Ollama. Zero custo de API. Zero dado saindo da minha máquina. Zero dependência de serviços externos.
+
+[PAUSA]
+
+[CENA: mostrar o git log do wiki — lista de commits com as páginas aprovadas]
+
+A wiki inteira está versionada em git. Cada aprovação é um commit com o nome da página e o score de confiança. Se eu aprovar algo errado, é um `git revert`.
+
+[CENA: abrir o `mcp_server.py` brevemente — mostrar que existe]
+
+E tem mais: já tem um servidor MCP implementado. Isso significa que o Claude Code — a IA que uso no terminal — pode consultar diretamente a minha base de conhecimento enquanto trabalha comigo. O Second Brain virou um recurso para outros agentes de IA.
 ## Ato 7 — Como Melhorar (~1,5 min)
 ## Ato 8 — Conclusão (~1 min)
 
