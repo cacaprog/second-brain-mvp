@@ -133,6 +133,64 @@ Não quero revisar manualmente cada uma das 18.000 notas. Para propostas de alta
 
 O resultado: um sistema que escala para qualquer volume, sem alucinação estrutural, rodando 100% local — sem custo de API, sem dado saindo da máquina.
 ## Ato 5 — O Pipeline na Prática (~3 min)
+
+> 🎯 **Objetivo:** O espectador acompanha o caminho de uma nota do início ao fim — sem precisar entender código para entender o valor de cada etapa.
+
+[CENA: abrir a pasta `data/raw/` mostrando as subpastas notion/, keep/, kindle/]
+
+Vamos acompanhar o caminho de uma nota, do início ao fim.
+
+**Etapa 1: As fontes**
+
+O sistema lê notas de qualquer lugar: exportações do Notion em Markdown, Google Keep em JSON, highlights do Kindle no arquivo de clippings, artigos em PDF, notas do Obsidian. Você coloca os arquivos na pasta `data/raw/` e o sistema começa a trabalhar.
+
+[PAUSA]
+
+**Etapa 2: Parsing e classificação**
+
+[CENA: mostrar o terminal com o parser identificando idioma e domínio de uma nota]
+
+Cada nota é lida por um parser específico para o formato. O sistema detecta o idioma automaticamente — português, inglês, francês, espanhol. Depois, classifica a nota num dos 26 domínios usando uma combinação de palavras-chave configuráveis e similaridade semântica. Uma nota sobre "MMM e ROAS" vai para analytics. Uma sobre "Taleb e antifragilidade" vai para filosofia.
+
+[PAUSA]
+
+**Etapa 3: A proposta do Ollama**
+
+[CENA: mostrar o index.md do domínio `philosophy` — lista de conceitos já existentes]
+
+Aqui é onde a mágica acontece. O modelo — Qwen 3.5 9B rodando localmente via Ollama — recebe dois inputs: o índice do domínio (uma lista de todos os conceitos já compilados, em ~3.000 tokens) e a nota nova. Ele retorna uma proposta em JSON: "essa nota pertence à página antifragilidade, com confiança 0.87, adicionando o link para via-negativa".
+
+[CENA: mostrar o JSON da proposta no terminal]
+
+Nada é escrito ainda. É só uma proposta.
+
+[PAUSA]
+
+**Etapa 4: A revisão humana**
+
+[CENA: CLI de revisão com diff colorido — verde para adições, vermelho para remoções]
+
+A proposta aparece na minha tela como um diff colorido. Verde são adições. Eu vejo exatamente o que vai mudar na página do wiki. Aperto `a` para aprovar, `r` para rejeitar com motivo, `e` para editar antes de aprovar. Para propostas claras, levo menos de 10 segundos.
+
+[PAUSA]
+
+**Etapa 5: O commit atômico**
+
+[CENA: mostrar o git log do wiki com commits sequenciais]
+
+Aprovada a proposta, o sistema executa uma transação coordenada: escreve o arquivo Markdown da página do wiki, atualiza o índice vetorial (ChromaDB) com o novo conteúdo, registra os links cruzados e faz um `git commit` na wiki. Cada aprovação é um commit. Para reverter uma decisão ruim: `git revert`.
+
+[PAUSA]
+
+**Etapa 6: A consulta**
+
+[CENA: terminal com uma query sendo feita — "O que é antifragilidade?" — e a resposta com citações [[wikilink]]]
+
+Na hora de consultar, a busca semântica encontra as páginas mais relevantes usando embeddings multilingues — uma busca em português encontra páginas em inglês e vice-versa. O modelo sintetiza a resposta usando apenas as páginas do wiki como contexto, citando as fontes com `[[wikilinks]]`. Não inventa nada que não esteja lá.
+
+[CENA: abrir uma página do wiki no Obsidian — mostrar o front matter YAML com slug, domínio, links, confidence]
+
+E aqui está uma página real do wiki — com metadados estruturados, as fontes originais, os links para conceitos relacionados, e o texto sintetizado pelo LLM e aprovado por mim.
 ## Ato 6 — O Estado Atual (~1,5 min)
 ## Ato 7 — Como Melhorar (~1,5 min)
 ## Ato 8 — Conclusão (~1 min)
