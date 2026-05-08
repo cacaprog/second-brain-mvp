@@ -60,6 +60,7 @@ A frase dele que ficou na minha cabeça foi essa: "O wiki é um artefato persist
 Não é busca. É [ÊNFASE] acumulação de compreensão.
 
 Quando li isso, pensei: é exatamente o que eu precisava.
+
 ## Ato 3 — O Limite da Ideia (~1,5 min)
 
 > 🎯 **Objetivo:** Virada dramática — a esperança criada no Ato 2 bate num muro específico e bem explicado. O espectador entende [ÊNFASE] por que o problema existe, não apenas que ele existe.
@@ -132,6 +133,7 @@ Não quero revisar manualmente cada uma das 18.000 notas. Para propostas de alta
 [CENA: diagrama completo do pipeline com os três princípios destacados]
 
 O resultado: um sistema que escala para qualquer volume, sem alucinação estrutural, rodando 100% local — sem custo de API, sem dado saindo da máquina.
+
 ## Ato 5 — O Pipeline na Prática (~3 min)
 
 > 🎯 **Objetivo:** O espectador acompanha o caminho de uma nota do início ao fim — sem precisar entender código para entender o valor de cada etapa.
@@ -191,6 +193,7 @@ Na hora de consultar, a busca semântica encontra as páginas mais relevantes us
 [CENA: abrir uma página do wiki no Obsidian — mostrar o front matter YAML com slug, domínio, links, confidence]
 
 E aqui está uma página real do wiki — com metadados estruturados, as fontes originais, os links para conceitos relacionados, e o texto sintetizado pelo LLM e aprovado por mim.
+
 ## Ato 6 — O Estado Atual (~1,5 min)
 
 > 🎯 **Objetivo:** Tornar o resultado concreto com números reais — o espectador vê que isso não é um projeto hipotético, é um sistema funcionando.
@@ -224,6 +227,7 @@ A wiki inteira está versionada em git. Cada aprovação é um commit com o nome
 [CENA: abrir o `mcp_server.py` brevemente — mostrar que existe]
 
 E tem mais: já tem um servidor MCP implementado. Isso significa que o Claude Code — a IA que uso no terminal — pode consultar diretamente a minha base de conhecimento enquanto trabalha comigo. O Second Brain virou um recurso para outros agentes de IA.
+
 ## Ato 7 — Como Melhorar (~1,5 min)
 
 > 🎯 **Objetivo:** O espectador vê o potencial futuro e entende que o sistema é uma plataforma — não um fim em si mesmo.
@@ -249,6 +253,7 @@ O que temos hoje é uma fundação. As direções mais promissoras para a próxi
 **Fine-tuning no próprio wiki.** No longo prazo: treinar um modelo pequeno com as páginas compiladas. Em vez de um modelo genérico que propõe integrações para qualquer assunto, um modelo que conhece [ÊNFASE] especificamente o meu Zettelkasten.
 
 [CENA: fade suave — preparar para a conclusão]
+
 ## Ato 8 — Conclusão (~1 min)
 
 > 🎯 **Objetivo:** Deixar uma ideia filosófica clara — não "esse sistema é legal" mas "esse sistema resolve um problema humano real de forma elegante".
