@@ -61,6 +61,40 @@ Não é busca. É [ÊNFASE] acumulação de compreensão.
 
 Quando li isso, pensei: é exatamente o que eu precisava.
 ## Ato 3 — O Limite da Ideia (~1,5 min)
+
+> 🎯 **Objetivo:** Virada dramática — a esperança criada no Ato 2 bate num muro específico e bem explicado. O espectador entende [ÊNFASE] por que o problema existe, não apenas que ele existe.
+
+[CENA: terminal rodando o pipeline do Karpathy com poucas notas — funcionando bem]
+
+Eu testei. Com 80, 90, 100 artigos — funcionou lindamente. As páginas de conceito eram coerentes, os wikilinks faziam sentido, o wiki estava crescendo do jeito certo.
+
+[PAUSA]
+
+Aí eu adicionei mais notas.
+
+[CENA: mostrar o contexto do LLM sendo preenchido progressivamente — como uma barra que enche até o limite]
+
+Aqui está o problema fundamental. LLMs têm uma janela de contexto — uma quantidade máxima de texto que conseguem processar de uma vez. É como tentar ler um livro de 600 páginas mas só conseguindo ver 20 por vez. Você perde o fio da meada.
+
+O Karpathy parte do pressuposto de uma coleção [ÊNFASE] curada e relativamente pequena. Com 18.000 notas, é impossível passar o corpus inteiro pelo modelo de uma vez. E se você passa só uma parte, o LLM não tem contexto suficiente para saber o que já existe no wiki.
+
+[PAUSA]
+
+O resultado? Alucinações de wikilinks.
+
+[CENA: exemplo de wikilink falso sendo criado — `[[antifragilidade]]` linkando para uma página que não existe, ou pior, existindo mas sendo incorreta]
+
+O LLM começa a criar conexões entre conceitos que não têm relação real. E num Zettelkasten — um sistema onde o valor vem justamente dos elos entre ideias — um link errado não é só um erro de fato.
+
+É como um GPS que inventa uma rua que não existe. Você segue com confiança... e se perde.
+
+[PAUSA]
+
+Um wikilink alucinado é [ÊNFASE] corrupção estrutural. Ele cria uma trilha falsa que contamina cada consulta futura que passa por ela.
+
+O Karpathy funciona para uma coleção curada. Para um Zettelkasten que cresceu durante anos, ele quebra.
+
+[CENA: pergunta visual na tela — "Como resolver isso?"]
 ## Ato 4 — O Insight Híbrido (~2 min)
 ## Ato 5 — O Pipeline na Prática (~3 min)
 ## Ato 6 — O Estado Atual (~1,5 min)
