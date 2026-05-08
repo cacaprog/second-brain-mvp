@@ -251,6 +251,61 @@ O que temos hoje é uma fundação. As direções mais promissoras para a próxi
 [CENA: fade suave — preparar para a conclusão]
 ## Ato 8 — Conclusão (~1 min)
 
+> 🎯 **Objetivo:** Deixar uma ideia filosófica clara — não "esse sistema é legal" mas "esse sistema resolve um problema humano real de forma elegante".
+
+[CENA: voltar à imagem inicial — as notas em silos desconexos]
+
+Começamos com um problema simples: 18.000 notas que nunca sintetizavam.
+
+[CENA: mostrar o grafo do wiki no Obsidian — nós conectados, domínios se cruzando]
+
+O que o Second Brain resolve não é busca. É [ÊNFASE] acumulação de compreensão. Cada nota aprovada não é só um arquivo salvo. É um tijolo numa estrutura de conhecimento que vai durar anos.
+
+[PAUSA]
+
+A diferença filosófica é essa: RAG puro é uma biblioteca. Você entra, busca, sai. O LLM Wiki híbrido é um pensador que lembra — e que cresce com você.
+
+[PAUSA]
+
+O Karpathy tinha razão na intuição. A escala exigiu uma solução diferente. E essa solução — com domain sharding, portão humano e fast-track — é o que permite que o sistema cresça junto com o conhecimento, sem corromper a estrutura que dá valor a tudo isso.
+
+[CENA: tela final com o título do projeto e os créditos]
+
+O código está no repositório. O design document está documentado. Se você quiser construir algo similar, o link do gist do Karpathy está na descrição — é por onde eu comecei.
+
+[PAUSA]
+
+Obrigado por assistir.
+
 ---
 
 ## Notas de Produção
+
+### Demonstrações ao vivo recomendadas
+- **Ato 5, Etapa 3:** mostrar o terminal com o Ollama gerando uma proposta em JSON ao vivo
+- **Ato 5, Etapa 4:** mostrar a CLI de revisão com diff colorido e apertar `a` ao vivo
+- **Ato 5, Etapa 6:** fazer uma query real e mostrar a resposta com wikilinks
+- **Ato 6:** abrir o Obsidian com o vault do wiki — navegar pelo grafo de conexões
+
+### Referências a incluir na descrição do vídeo
+- Gist do Karpathy: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
+- Repositório do projeto: [link do repo]
+- Spec de design: `docs/superpowers/specs/2026-05-08-second-brain-video-script-design.md`
+
+### Recursos visuais sugeridos
+- **Ato 3:** diagrama animado simples da janela de contexto sendo preenchida até o limite
+- **Ato 4:** diagrama dos 3 princípios (domain sharding, portão humano, fast-track) com ícones
+- **Ato 6:** screenshot do `git log` do wiki com commits reais
+
+### Duração estimada por ato (para edição)
+| Ato | Estimativa |
+|---|---|
+| Ato 1 — Gancho | ~1 min |
+| Ato 2 — A Descoberta | ~2 min |
+| Ato 3 — O Limite da Ideia | ~1,5 min |
+| Ato 4 — O Insight Híbrido | ~2 min |
+| Ato 5 — O Pipeline na Prática | ~3 min |
+| Ato 6 — O Estado Atual | ~1,5 min |
+| Ato 7 — Como Melhorar | ~1,5 min |
+| Ato 8 — Conclusão | ~1 min |
+| **Total** | **~13,5 min** |
