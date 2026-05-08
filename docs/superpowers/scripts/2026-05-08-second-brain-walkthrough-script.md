@@ -96,6 +96,42 @@ O Karpathy funciona para uma coleção curada. Para um Zettelkasten que cresceu 
 
 [CENA: pergunta visual na tela — "Como resolver isso?"]
 ## Ato 4 — O Insight Híbrido (~2 min)
+
+> 🎯 **Objetivo:** O espectador entende a solução e sente que ela é elegante — não um hack, mas uma resposta arquitetural para o problema certo.
+
+[CENA: diagrama mostrando RAG e LLM Wiki como duas metades que se encaixam]
+
+A solução não era escolher entre RAG e LLM Wiki. Era [ÊNFASE] combinar os dois — e resolver o problema de escala com três princípios.
+
+[PAUSA]
+
+**Primeiro princípio: domain sharding.**
+
+[CENA: mostrar os 26 domínios como gavetas separadas — analytics, filosofia, psicologia, ficção...]
+
+Em vez de um único bibliotecário que precisa conhecer 18.000 livros de memória, você tem 26 especialistas — cada um expert no próprio domínio. O LLM nunca vê o corpus inteiro. Ele vê apenas o índice de um domínio por vez — cerca de 3.000 tokens. Cabe na janela de contexto com folga.
+
+[PAUSA]
+
+**Segundo princípio: o LLM propõe, o humano aprova.**
+
+[CENA: CLI de revisão mostrando um diff colorido de uma proposta]
+
+Nenhuma página chega ao wiki sem passar por um portão de revisão humana. O LLM lê a nota nova, consulta o índice do domínio e propõe: "essa nota pertence à página X, com os links Y e Z, com essa confiança." Eu vejo o diff, aprovo ou rejeito. Isso elimina o risco de corrupção estrutural — porque o humano é o guardião dos links.
+
+[PAUSA]
+
+**Terceiro princípio: fast-track para o óbvio.**
+
+[CENA: barra de confiança passando de 0 a 0.85 — verde]
+
+Não quero revisar manualmente cada uma das 18.000 notas. Para propostas de alta confiança — acima de 85% — que apenas atualizam páginas já existentes sem criar links novos, o sistema aprova automaticamente e registra num log. É como pré-aprovação de cartão de crédito para compras abaixo de R$ 50 — você revisa o extrato depois, não cada transação.
+
+[PAUSA]
+
+[CENA: diagrama completo do pipeline com os três princípios destacados]
+
+O resultado: um sistema que escala para qualquer volume, sem alucinação estrutural, rodando 100% local — sem custo de API, sem dado saindo da máquina.
 ## Ato 5 — O Pipeline na Prática (~3 min)
 ## Ato 6 — O Estado Atual (~1,5 min)
 ## Ato 7 — Como Melhorar (~1,5 min)
