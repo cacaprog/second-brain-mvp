@@ -4,7 +4,6 @@ Executes all 7 commit steps in order; all steps 1-6 are idempotent.
 On startup, replays any commits stuck in status='committing'.
 """
 from pathlib import Path
-from typing import Optional
 
 import yaml
 
@@ -28,14 +27,13 @@ def commit(proposal: Proposal, note: NoteRecord) -> None:
     from vector_store import get_vector_store
 
     db = get_db()
-    cfg = _load_settings()
 
     # Step 1 — begin commit (status = 'committing')
     commit_id = db.begin_commit(proposal.id)
 
     try:
         # Resolve content: article knowledge cards use their own renderer
-        if note.note_type == "article":
+        if note.note_type in ("article", "rich_note"):
             source_url = None
             if note.source in ("articles",):
                 from article_parser import extract_source_url
@@ -51,6 +49,7 @@ def commit(proposal: Proposal, note: NoteRecord) -> None:
                 confidence=proposal.confidence,
                 source_url=source_url,
                 edited_content=None,
+                note_type=note.note_type,
             )
         else:
             content = wiki_store.render_wiki_page(

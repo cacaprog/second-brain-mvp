@@ -489,6 +489,59 @@ Press `r` on any entry to trigger a git revert (retroactive rejection).
 
 ## Part 4 — Ongoing Operations
 
+### Check ingestion completeness
+
+Use this to know whether every file has been fully processed and every note is in
+the wiki.
+
+**Quick dashboard (proposals + note statuses by domain):**
+
+```bash
+uv run python src/batch_ingest.py --status
+```
+
+**You are done when all three conditions are true:**
+
+| Status | Target | Meaning if non-zero |
+|--------|--------|---------------------|
+| `pending` / `ingested` | **0** | Files still waiting to be classified/proposed |
+| `commit_failed` | **0** | Pipeline errors — wiki write failed |
+| `classified` | 0 | Proposals waiting for your review (expected to be non-zero during active use) |
+
+`committed` and `rejected` are terminal states — nothing to do.
+
+**Raw SQL check:**
+
+```bash
+sqlite3 -column -header db/brain.sqlite "
+SELECT
+    n.source,
+    COUNT(*)                                                          AS total,
+    SUM(CASE WHEN n.status='committed'     THEN 1 ELSE 0 END)        AS committed,
+    SUM(CASE WHEN n.status='classified'    THEN 1 ELSE 0 END)        AS awaiting_review,
+    SUM(CASE WHEN n.status='commit_failed' THEN 1 ELSE 0 END)        AS failed,
+    SUM(CASE WHEN n.status IN ('pending','ingested') THEN 1 ELSE 0 END) AS in_progress,
+    SUM(CASE WHEN n.status='rejected'      THEN 1 ELSE 0 END)        AS rejected
+FROM notes n
+GROUP BY n.source
+ORDER BY total DESC;
+"
+```
+
+**Note on file count vs note count:** raw file counts will never match note counts.
+Kindle produces one note per book from a single `.txt` file; empty and config files
+are skipped silently. Do not use `find data/raw | wc -l` as a completeness check.
+
+**Resolving `commit_failed` notes:**
+
+```bash
+uv run python src/review_cli.py --errors
+# r = re-queue for fresh attempt   d = dismiss permanently
+```
+
+Once `commit_failed = 0`, `pending = 0`, `ingested = 0`, and the `classified` review
+queue is cleared — every sentence from every source file is in the wiki.
+
 ### Daily backup (set up cron)
 
 ```bash
@@ -520,6 +573,54 @@ uv run python src/query.py "O que é antifragilidade?" --domain philosophy
 
 # Cross-domain (slower, uses cross-encoder re-ranking)
 uv run python src/query.py "Como vieses cognitivos afetam decisões financeiras?"
+```
+
+### Rich note knowledge cards
+
+Notes from any source (Kindle, Notion, Keep, etc.) with **4 or more paragraphs** are
+automatically treated as rich notes and routed through the knowledge-card generation
+path — the same structured four-section format used for articles and papers. In the
+review TUI they show a green `RICH NOTE` label so you know the source is highlights,
+not a published article.
+
+The threshold is configurable without touching code:
+
+```yaml
+# config/settings.yaml
+ingestion:
+  rich_note_paragraph_threshold: 4   # increase to require more content before upgrading
+```
+
+**Check how many notes qualified as rich notes:**
+
+```bash
+sqlite3 -column -header db/brain.sqlite "
+SELECT
+    source,
+    COUNT(*) AS rich_notes,
+    SUM(CASE WHEN status='committed' THEN 1 ELSE 0 END) AS committed,
+    SUM(CASE WHEN status='classified' THEN 1 ELSE 0 END) AS awaiting_review
+FROM notes
+WHERE note_type='rich_note'
+GROUP BY source
+ORDER BY rich_notes DESC;
+"
+```
+
+**Tune the threshold if too many thin notes are getting knowledge-card treatment:**
+
+```bash
+# Edit the threshold, then re-ingest affected notes (optional — only new ingestion
+# picks up the new threshold; existing classified/committed notes are unaffected)
+# To force re-routing of pending rich notes, reset them:
+sqlite3 db/brain.sqlite "
+UPDATE notes SET status='pending', note_type=NULL
+WHERE note_type='rich_note' AND status='classified';
+DELETE FROM proposals
+WHERE note_id IN (SELECT id FROM notes WHERE note_type IS NULL AND status='pending')
+  AND decision IS NULL;
+"
+# Then re-run batch ingest or watcher --once
 ```
 
 ### Clean and merge wiki pages

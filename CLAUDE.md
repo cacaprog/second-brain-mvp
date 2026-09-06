@@ -13,6 +13,7 @@ Auto-generated from all feature plans. Last updated: 2026-04-25
 - wiki Markdown files (`wiki/domains/*/`), domain index tables (`index.md`), ChromaDB (local), SQLite `db/brain.sqlite` (`notes.wiki_page` column) (007-merge-slug-duplicates)
 - Python 3.11+ + ollama, sqlite3 (stdlib), PyYAML, rich — all existing (008-smart-wiki-cleaner)
 - SQLite `db/brain.sqlite` (read-only for `notes.note_type`), wiki Markdown files (008-smart-wiki-cleaner)
+- SQLite `db/brain.sqlite` — existing `notes.note_type` column (no migration) (009-rich-note-knowledge-cards)
 
 - Python 3.11+ + ollama (Qwen 3.5 9B), chromadb, sentence-transformers (001-second-brain-v2-system)
 
@@ -32,9 +33,9 @@ cd src [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLO
 Python 3.11+: Follow standard conventions
 
 ## Recent Changes
+- 009-rich-note-knowledge-cards: Added Python 3.11+ + ollama, sqlite3 (stdlib), PyYAML, rich — all existing
 - 008-smart-wiki-cleaner: Added Python 3.11+ + ollama, sqlite3 (stdlib), PyYAML, rich — all existing
 - 007-merge-slug-duplicates: Added Python 3.11+ + `yaml`, `re`, `pathlib`, `ollama` (existing); consolidation logic from `wiki_cleaner.py` (feature 006)
-- 005-article-knowledge-cards: Added Python 3.11+ + `pymupdf` (PDF text extraction — new); existing: `rich`, `sqlite3`, `chromadb`, `sentence-transformers`, `ollama`, `pyyaml`, `watchdog`
 
 
 <!-- MANUAL ADDITIONS START -->
