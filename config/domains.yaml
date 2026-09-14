@@ -1,0 +1,825 @@
+domains:
+  analytics:
+    seeds:
+    - atribuição
+    - churn
+    - funil
+    - ROAS
+    - mídia paga
+    - marketing mix
+    - incrementality
+    - métrica
+    - KPI
+    - dashboard
+    - drill-down
+    - cohort analysis
+    - LTV
+    - CAC
+    - ROMI
+    - retenção
+    - taxa de abandono
+    - segmentação
+    - heatmap
+    - sessão
+    - event tracking
+    - UTM
+    - clickstream
+    - tempo na página
+    - taxa de rejeição
+    - engajamento
+    - adoção
+    - desvio padrão
+    - correlação
+    - preditiva
+    - descritiva
+    - diagnóstica
+    max_pages: 300
+
+  philosophy:
+    seeds:
+    - estoicismo
+    - antifragilidade
+    - Taleb
+    - Seneca
+    - via negativa
+    - Marcus Aurelius
+    - Epictetus
+    - ontologia
+    - epistemologia
+    - axiologia
+    - teleologia
+    - deontologia
+    - fenômeno
+    - dualismo
+    - empirismo
+    - racionalismo
+    - ceticismo
+    - niilismo
+    - existencialismo
+    - hermenêutica
+    - dialética
+    - a priori
+    - tabula rasa
+    - contratualismo
+    - utilitarismo
+    - imperativo categórico
+    - eudaimonia
+    - phronesis
+    - ética da virtude
+    - alteridade
+    - má fé
+    - Hadot
+    - hedonismo
+    - monismo
+    max_pages: 350
+
+  data-science:
+    seeds:
+    - regressão
+    - clustering
+    - random forest
+    - feature engineering
+    - aprendizado de máquina
+    - gradient boosting
+    - rede neural
+    - sobreajuste
+    - underfitting
+    - validação cruzada
+    - boosting
+    - bagging
+    - árvore de decisão
+    - PCA
+    - t-SNE
+    - k-means
+    - DBSCAN
+    - regressão logística
+    - SVM
+    - naive bayes
+    - dropout
+    - backpropagation
+    - embedding
+    - tokenização
+    - word2vec
+    - BERT
+    - fine-tuning
+    - pipeline
+    - feature store
+    - data lake
+    - governança de dados
+    - survival analysis
+    - curadoria de dados
+    max_pages: 200
+
+  behavioral-economics:
+    seeds:
+    - Kahneman
+    - Thaler
+    - nudge
+    - viés cognitivo
+    - heurística
+    - prospect theory
+    - aversão à perda
+    - ancoragem
+    - framing
+    - overconfidence
+    - efeito dotação
+    - status quo bias
+    - default effect
+    - choice architecture
+    - bounded rationality
+    - viés de confirmação
+    - hindsight bias
+    - disponibilidade
+    - representatividade
+    - mental accounting
+    - hyperbolic discounting
+    - aversão ao arrependimento
+    - decoy effect
+    - efeito manada
+    - falácia do custo irrecuperável
+    - ilusão de controle
+    - reciprocidade
+    - normas sociais
+    - irracionalidade
+    - preferência revelada
+    max_pages: 150
+
+  fiction:
+    seeds:
+    - Tolkien
+    - worldbuilding
+    - narrativa
+    - personagem
+    - enredo
+    - fantasia
+    - plot twist
+    - narrador não confiável
+    - protagonista
+    - antagonista
+    - arco de personagem
+    - backstory
+    - ambientação
+    - clímax
+    - foreshadowing
+    - flashback
+    - monólogo interior
+    - fluxo de consciência
+    - metaficção
+    - suspensão de descrença
+    - verossimilhança
+    - alegoria
+    - sátira
+    - distopia
+    - utopia
+    - realismo fantástico
+    - slipstream
+    - fanfiction
+    - crossover
+    - prequela
+    - spinoff
+    max_pages: 150
+
+  neuroscience:
+    seeds:
+    - neuroplasticidade
+    - dopamina
+    - córtex
+    - cognição
+    - memória
+    - sinapse
+    - Ramón y Cajal
+    - dendrito
+    - bainha de mielina
+    - neurotransmissor
+    - Kandel
+    - glutamato
+    - Damásio
+    - GABA
+    - LeDoux
+    - neurogênese
+    - potencial de ação
+    - Varela
+    - engrama
+    - neuroimagem
+    - fMRI
+    - EEG
+    - MEG
+    - optogenética
+    - patch clamp
+    - neuroinflamação
+    - microglia
+    - Lynch
+    - pruning
+    - spike
+    max_pages: 120
+
+  personal:
+    seeds:
+    - diário
+    - reflexão
+    - meta
+    - hábito
+    - rotina
+    - autoconhecimento
+    - autoestima
+    - resiliência
+    - propósito
+    - vulnerabilidade
+    - limites
+    - autocuidado
+    - mindfulness
+    - gratidão
+    - compaixão
+    - perdão
+    - assertividade
+    - disciplina
+    - procrastinação
+    - zona de conforto
+    - growth mindset
+    - autossabotagem
+    - afirmações
+    - legado
+    - valores
+    - missão pessoal
+    - integridade
+    - autenticidade
+    - congruência
+    - bem-estar subjetivo
+    - proatividade
+    max_pages: 200
+
+  marketing:
+    seeds:
+    - marca
+    - posicionamento
+    - conversão
+    - conteúdo
+    - branding
+    - persona
+    - funil de vendas
+    - lead
+    - nutrição
+    - CRM
+    - upsell
+    - cross-sell
+    - storytelling
+    - omnichannel
+    - remarketing
+    - influenciador
+    - engajamento
+    - alcance
+    - impressão
+    - CTR
+    - SWOT
+    - matriz BCG
+    - 4 Ps
+    - ROI
+    - CPA
+    - landing page
+    - CTA
+    - SEO
+    - pesquisa de mercado
+    - jornada do cliente
+    - Ansoff
+    - 7 Ps
+    max_pages: 200
+
+  career:
+    seeds:
+    - carreira
+    - liderança
+    - gestão
+    - negociação
+    - produtividade
+    - plano de carreira
+    - upskilling
+    - reskilling
+    - networking
+    - mentoria
+    - coaching
+    - feedback
+    - avaliação de desempenho
+    - promoção
+    - layoff
+    - freelancing
+    - portfólio
+    - personal branding
+    - recrutamento
+    - onboarding
+    - offboarding
+    - employee engagement
+    - plano sucessório
+    - vesting
+    - work-life balance
+    - home office
+    - burnout
+    - job rotation
+    - salary range
+    - benefícios flexíveis
+    max_pages: 100
+
+  mental-model:
+    seeds:
+    - pensamento de primeira ordem
+    - segunda ordem
+    - custo de oportunidade
+    - trade-off
+    - mapa não é o território
+    - círculo de competência
+    - navalha de Occam
+    - viés de sobrevivência
+    - lei de Pareto
+    - pensamento probabilístico
+    - pensamento lateral
+    - reversão à média
+    - efeito de ancoragem
+    - viés de confirmação
+    - viés de disponibilidade
+    - heurística da representatividade
+    - falácia do jogador
+    - viés do presente
+    - viés da retrospectiva
+    - efeito manada
+    - pensamento anti-frágil
+    - via negativa
+    - princípio da precaução
+    - lei de Hick
+    - lei de Parkinson
+    - princípio de Peter
+    - lei de Goodhart
+    - viés de status quo
+    - efeito observador
+    - maldição do conhecimento
+    max_pages: 300
+
+  management:
+    seeds:
+    - OKRs
+    - KPIs
+    - feedback contínuo
+    - one-on-one
+    - gestão ágil
+    - scrum
+    - kanban
+    - gestão de projetos
+    - delegação
+    - empowerment
+    - gestão de desempenho
+    - priorização
+    - matriz de Eisenhower
+    - gestão de tempo
+    - daily stand-up
+    - retrospectiva
+    - gestão de riscos
+    - tomada de decisão
+    - gestão de equipes
+    - gestão por processos
+    - feedback 360
+    - gestão de mudanças
+    - planejamento estratégico
+    - gestão de conflitos
+    - Peter Drucker
+    - gestão por objetivos
+    - ciclo PDCA
+    - Henry Mintzberg
+    - Jim Collins
+    - Simon Sinek
+    - Clayton Christensen
+    - Teoria das Restrições
+    - Michael Porter
+    - cinco forças
+    - John Kotter
+    - Stephen Covey
+    - liderança situacional
+    - Patrick Lencioni
+    max_pages: 300
+
+  science:
+    seeds:
+    - método científico
+    - hipótese
+    - experimento
+    - variável dependente
+    - variável independente
+    - grupo de controle
+    - replicação
+    - falseabilidade
+    - revisão por pares
+    - teoria científica
+    - lei científica
+    - indução
+    - dedução
+    - falseacionismo
+    - paradigma
+    - mudança de paradigma
+    - revolução científica
+    - Karl Popper
+    - Thomas Kuhn
+    - problema da demarcação
+    - Paul Feyerabend
+    - Imre Lakatos
+    - Mario Bunge
+    - realismo científico
+    - Gaston Bachelard
+    - Francis Bacon
+    - David Hume
+    - problema da indução
+    - Charles Darwin
+    - Albert Einstein
+    - Richard Feynman
+    - Carl Sagan
+    - ceticismo científico
+    - balanço da dúvida
+    - ciência aberta
+    max_pages: 300
+
+  psychology:
+    seeds:
+    - condicionamento clássico
+    - condicionamento operante
+    - reforço positivo
+    - behaviorismo
+    - cognitivismo
+    - construtivismo
+    - humanismo
+    - gestalt
+    - insight
+    - zona de desenvolvimento proximal
+    - mecanismos de defesa
+    - recalque
+    - estágios psicossociais
+    - hierarquia de necessidades
+    - autorrealização
+    - inconsciente coletivo
+    - arquétipos
+    - tendência atualizante
+    - consideração positiva incondicional
+    - empatia
+    - dissonância cognitiva
+    - aprendizagem social
+    - autoeficácia
+    - resiliência
+    - teoria do apego
+    - Vygotsky
+    - Jean Piaget
+    - estágios do desenvolvimento cognitivo
+    - B.F. Skinner
+    - Ivan Pavlov
+    - Albert Bandura
+    - Carl Rogers
+    - Abraham Maslow
+    - Sigmund Freud
+    - Carl Jung
+    - psicologia positiva
+    - Martin Seligman
+    - flow
+    max_pages: 300
+
+  nature:
+    seeds:
+    - biodiversidade
+    - ecossistema
+    - bioma
+    - habitat
+    - nicho ecológico
+    - cadeia alimentar
+    - nível trófico
+    - fotossíntese
+    - evolução
+    - seleção natural
+    - adaptação
+    - especiação
+    - extinção
+    - deriva genética
+    - sucessão ecológica
+    - espécie invasora
+    - espécie endêmica
+    - mutualismo
+    - parasitismo
+    - predação
+    - simbiose
+    - ciclo do carbono
+    - efeito estufa
+    - aquecimento global
+    - serviço ecossistêmico
+    - polinização
+    - conservação
+    - corredor ecológico
+    - restauração ecológica
+    - resiliência ecológica
+    - Amazônia
+    - Mata Atlântica
+    - Cerrado
+    - recife de coral
+    - hotspot de biodiversidade
+    - Rachel Carson
+    - E.O. Wilson
+    - hipótese de Gaia
+    max_pages: 300
+
+  theology:
+    seeds:
+    - teísmo
+    - ateísmo
+    - agnosticismo
+    - panteísmo
+    - monoteísmo
+    - politeísmo
+    - revelação
+    - escritura
+    - exegese
+    - hermenêutica
+    - teologia natural
+    - teologia sistemática
+    - teologia da libertação
+    - apologética
+    - patrística
+    - escolástica
+    - mística
+    - fé
+    - dogma
+    - heresia
+    - sacramento
+    - liturgia
+    - oração
+    - teodiceia
+    - problema do mal
+    - livre arbítrio
+    - predestinação
+    - milagre
+    - Trindade
+    - cristologia
+    - soteriologia
+    - escatologia
+    - salvação
+    - graça
+    - pecado
+    - reencarnação
+    - karma
+    - nirvana
+    max_pages: 300
+
+  market:
+    seeds:
+    - bolsa
+    - trading
+    - varejo
+    - atacado
+    - lucro
+    - bid
+    - ação
+    - commodity
+    - corretagem
+    - hedge
+    - volatilidade
+    - monopólio
+    - liquidez
+    - franquia
+    - arbitragem
+    - estoque
+    - alavancagem
+    - demanda
+    - oferta
+    - preço
+    - margem
+    - concorrência
+    - oligopólio
+    - truste
+    - cartel
+    - fusão
+    - aquisição
+    - IPO
+    - dividendos
+    - buyback
+    max_pages: 300
+
+  history:
+    seeds:
+    - arquivo
+    - crônica
+    - antiguidade
+    - medieval
+    - fonte
+    - artefato
+    - cronologia
+    - dinastia
+    - heresia
+    - revolução
+    - tratado
+    - oralidade
+    - cartografia
+    - anais
+    - paleografia
+    - decolonial
+    - manuscrito
+    - historiografia
+    - zeitgeist
+    - exílio
+    - hegemonia
+    - genealogia
+    - iconografia
+    - pós-colonial
+    - hermenêutica
+    - periodização
+    - positivismo histórico
+    - Escola dos Annales
+    - micro-história
+    - história oral
+    max_pages: 300
+
+  tech:
+    seeds:
+    - firmware
+    - nuvem
+    - criptografia
+    - hardware
+    - software
+    - latência
+    - API
+    - back-end
+    - front-end
+    - blockchain
+    - IoT
+    - middleware
+    - cache
+    - contêiner
+    - virtualização
+    - edge computing
+    - biometria
+    - chatbot
+    - criptomoeda
+    - mineração de dados
+    - wearable
+    - assistente virtual
+    - ransomware
+    - rede mesh
+    - automação
+    - interoperabilidade
+    - overclock
+    - daemon
+    - socket
+    - CI/CD
+    max_pages: 300
+
+  sociology:
+    seeds:
+    - anomia
+    - habitus
+    - estratificação
+    - teoria do labelling
+    - mobilidade social
+    - alteridade
+    - solidariedade mecânica
+    - interseccionalidade
+    - pós-modernidade
+    - ideologia
+    - reprodução social
+    - campo social
+    - ethos
+    - capital cultural
+    - desvio
+    - estigma
+    - estruturação
+    - agência
+    - coesão social
+    - holismo
+    - individualismo metodológico
+    - aculturação
+    - etnocentrismo
+    - relativismo cultural
+    - fato social
+    - ação social
+    - imaginário social
+    - Max Weber
+    - Karl Marx
+    - Émile Durkheim
+    - Pierre Bourdieu
+    - Bauman
+    - resiliência comunitária
+    max_pages: 300
+
+  math:
+    seeds:
+    - teorema
+    - variância
+    - derivada
+    - integral
+    - correlação
+    - vetor
+    - covariância
+    - matriz
+    - regressão
+    - autovalor
+    - distribuição normal
+    - isomorfismo
+    - teste t
+    - topologia
+    - qui-quadrado
+    - homeomorfismo
+    - ANOVA
+    - mediana
+    - moda
+    - continuidade
+    - quantil
+    - limite
+    - bootstrap
+    - série
+    - inferência
+    - espaço amostral
+    - p-value
+    - álgebra linear
+    - cálculo diferencial
+    - probabilidade
+    max_pages: 300
+
+  health:
+    seeds:
+    - bem-estar
+    - sleep hygiene
+    - alimentação saudável
+    - sedentary lifestyle
+    - hidratação
+    - qualidade de vida
+    - longevidade
+    - envelhecimento ativo
+    - espiritualidade
+    - grounding
+    - hormese
+    - vitalidade
+    - recuperação
+    - equilíbrio
+    - flourishing
+    - prevenção
+    - lifestyle medicine
+    - saúde mental
+    - exercício físico
+    - medicina preventiva
+    - sono reparador
+    - estresse crônico
+    - sistema imunológico
+    - inflamação
+    - nutracêuticos
+    max_pages: 300
+
+  leadership:
+    seeds:
+    - visão
+    - influence
+    - autonomia
+    - escuta ativa
+    - sponsorship
+    - psychological safety
+    - accountability
+    - adaptabilidade
+    - decisão sob incerteza
+    - pensamento sistêmico
+    - vulnerabilidade
+    - leading by example
+    - servant leadership
+    - liderança distribuída
+    - liderança transformacional
+    - liderança autêntica
+    - mediação
+    - engajamento
+    - propósito
+    - legado
+    - sucessão
+    - inteligência emocional
+    - resiliência
+    - confiança psicológica
+    - clima organizacional
+    max_pages: 300
+
+  economy:
+    seeds:
+    - inflação
+    - deflação
+    - PIB
+    - recessão
+    - expansão
+    - desemprego
+    - estrutura de mercado
+    - monopólio
+    - oligopólio
+    - externalidade
+    - bem público
+    - elasticidade
+    - excedente do consumidor
+    - perda de peso morto
+    - juros compostos
+    - amortização
+    - aversão ao risco
+    - portfólio
+    - diversificação
+    - hedge
+    - política monetária
+    - quantitative easing
+    - tarifa
+    - embargo
+    - paridade do poder de compra
+    - coeficiente de Gini
+    - linha da pobreza
+    - crowding out
+    - oferta e demanda
+    - custo de oportunidade
+    max_pages: 300

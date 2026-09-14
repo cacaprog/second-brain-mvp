@@ -1,10 +1,28 @@
 # Data processing
 beautifulsoup4
 lxml
+python-dateutil
 
 # Utilities
-python-dateutil
 langdetect
+pyyaml
+python-dotenv
 
-# Web interface
+# LLM & embeddings
+ollama
+sentence-transformers
+
+# Vector store
+chromadb
+
+# File watching
+watchdog
+
+# CLI interface
+rich
+
+# MCP server
+fastmcp
+
+# Web interface (optional)
 gradio

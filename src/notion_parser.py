@@ -1,78 +1,72 @@
 """
-Parser for Notion markdown exports
+Parser for Notion markdown exports.
 """
+import hashlib
 import re
-import uuid
+from datetime import datetime, timezone
 from pathlib import Path
-from datetime import datetime
 from typing import List
-from models import Note, SourceType
+from models import NoteRecord
 
 
 class NotionParser:
-    """Parse Notion markdown exports"""
-    
+    """Parse Notion markdown exports into NoteRecords."""
+
     @staticmethod
-    def parse_file(file_path: Path) -> Note:
-        """Parse a single Notion markdown file"""
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Extract title (first # heading)
-        title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
-        title = title_match.group(1) if title_match else file_path.stem
-        
-        # Extract tags
+    def parse_to_record(file_path: Path) -> NoteRecord:
+        """Parse a Notion markdown file into a v2 NoteRecord."""
+        from langdetect import detect, DetectorFactory
+        DetectorFactory.seed = 0
+
+        raw_bytes = file_path.read_bytes()
+        content = raw_bytes.decode("utf-8")
+        note_id = hashlib.sha256(raw_bytes).hexdigest()
+
+        title_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
+        title = title_match.group(1).strip() if title_match else file_path.stem
+
         tags = []
-        tag_match = re.search(r'^Tag:\s*(.+)$', content, re.MULTILINE)
+        tag_match = re.search(r"^Tag:\s*(.+)$", content, re.MULTILINE)
         if tag_match:
-            tag_text = tag_match.group(1)
-            tags = [t.strip() for t in tag_text.split(',')]
-        
-        # Extract source URL if present
-        source_url = None
-        source_match = re.search(r'^Source:\s*(.+)$', content, re.MULTILINE)
-        if source_match:
-            source_url = source_match.group(1)
-        
-        # Extract type if present
-        note_type = None
-        type_match = re.search(r'^Type:\s*(.+)$', content, re.MULTILINE)
-        if type_match:
-            note_type = type_match.group(1)
-        
-        # Remove metadata lines from content
-        clean_content = re.sub(r'^(#\s+.+|Tag:.+|Source:.+|Type:.+)\n?', '', content, flags=re.MULTILINE)
-        clean_content = clean_content.strip()
-        
-        # Try to get creation date from file stats
+            tags = [t.strip() for t in tag_match.group(1).split(",")]
+
+        hash_tags = re.findall(r"(?<!\[)#(\w+)", content)
+        tags = list(dict.fromkeys(tags + hash_tags))
+
+        body = re.sub(r"^(#\s+.+|Tag:.+|Source:.+|Type:.+)\n?", "", content, flags=re.MULTILINE).strip()
+        word_count = len(body.split())
+
         try:
-            created_at = datetime.fromtimestamp(file_path.stat().st_ctime)
-        except:
-            created_at = None
-        
-        return Note(
-            id=str(uuid.uuid4()),
+            lang = detect(body[:500]) if body else "unknown"
+            if lang not in ("pt", "en", "fr", "es"):
+                lang = "unknown"
+        except Exception:
+            lang = "unknown"
+
+        stat = file_path.stat()
+        created_at = datetime.fromtimestamp(stat.st_ctime, tz=timezone.utc).isoformat()
+        modified_at = datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc).isoformat()
+
+        return NoteRecord(
+            id=note_id,
             title=title,
-            content=clean_content,
-            source=SourceType.NOTION,
+            body=body,
             tags=tags,
+            language=lang,
+            source="notion",
+            source_path=str(file_path.resolve()),
             created_at=created_at,
-            metadata={
-                "file_path": str(file_path),
-                "source_url": source_url,
-                "type": note_type
-            }
+            modified_at=modified_at,
+            word_count=word_count,
         )
-    
+
     @staticmethod
-    def parse_directory(directory: Path) -> List[Note]:
-        """Parse all markdown files in a directory"""
-        notes = []
+    def parse_directory_to_records(directory: Path) -> List[NoteRecord]:
+        """Parse all markdown files in a directory to NoteRecords."""
+        records = []
         for md_file in directory.glob("**/*.md"):
             try:
-                note = NotionParser.parse_file(md_file)
-                notes.append(note)
+                records.append(NotionParser.parse_to_record(md_file))
             except Exception as e:
                 print(f"Error parsing {md_file}: {e}")
-        return notes
+        return records
