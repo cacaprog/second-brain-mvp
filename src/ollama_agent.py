@@ -5,7 +5,6 @@ Post-processes the JSON response and determines fast-track eligibility.
 """
 import json
 import re
-import unicodedata
 import uuid
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 from datetime import datetime, timezone
@@ -15,6 +14,7 @@ from typing import Optional
 import yaml
 
 from models import NoteRecord, Proposal
+from slug_utils import PLACEHOLDER_SLUGS, is_placeholder, slugify, strip_domain_suffix
 from wiki_store import read_domain_index, slug_exists_in_index
 
 
@@ -38,6 +38,10 @@ Language: {language}
 
 Rules:
 - The proposed_page slug must be 1–4 words, lowercase-hyphenated, max 40 chars (e.g. "antifragilidade", "decisoes-reversiveis").
+- The slug must name the concept itself, not restate the note's title or its own
+  instructional/prompt-like phrasing as a sentence (e.g. prefer "sprint-methodology"
+  over "sprint-how-to-solve-big-problems-and-test-new-ideas").
+- Do not append the domain name to the slug.
 - Only propose [[wikilinks]] to concepts explicitly listed in the index above.
 - If no link is warranted, return an empty proposed_links list.
 - Do not hallucinate connections.
@@ -90,15 +94,6 @@ Output the four sections and nothing else.
 """
 
 STRICT_SUFFIX = "\nRespond with valid JSON only. No explanation, no markdown fences."
-
-
-def _slugify(text: str) -> str:
-    # Transliterate accented chars (ã→a, ç→c, etc.) before stripping
-    normalized = unicodedata.normalize("NFKD", text.lower())
-    ascii_text = normalized.encode("ascii", "ignore").decode("ascii")
-    slug = re.sub(r"[^a-z0-9\s-]", "", ascii_text)
-    slug = re.sub(r"[\s]+", "-", slug.strip())
-    return slug[:40]
 
 
 def _call_ollama(model: str, prompt: str, timeout: int, num_predict: int = 512) -> str:
@@ -189,13 +184,12 @@ def generate_proposal(note: NoteRecord, domain: str) -> Optional[Proposal]:
     link_only_threshold = cfg["ingestion"]["link_only_word_threshold"]
     num_predict = cfg["ollama"].get("num_predict", 4096)
 
-    _INVALID_SLUGS_SET = {"none", "null", "untitled", "no-proposal", "no-concept", "unknown", "n-a"}
     raw_index = read_domain_index(domain)
     # Strip any rows whose slug column matches an invalid slug so the model
     # cannot select them as targets.
     domain_index = "\n".join(
         line for line in raw_index.splitlines()
-        if not any(f"| {s} |" in line for s in _INVALID_SLUGS_SET)
+        if not any(f"| {s} |" in line for s in PLACEHOLDER_SLUGS)
     )
     prompt = PROPOSAL_PROMPT.format(
         domain_index=domain_index,
@@ -233,13 +227,13 @@ def generate_proposal(note: NoteRecord, domain: str) -> Optional[Proposal]:
     if any(summary.lower().startswith(p) for p in _NOTE_FIRST_PREFIXES):
         raise ValueError(f"Summary uses note-first phrasing: {summary[:60]!r}")
 
-    _INVALID_SLUGS = {"none", "null", "untitled", "no-proposal", "no-concept", "unknown", "n-a"}
     proposed_page_raw = str(data.get("proposed_page", note.title))
-    proposed_page = _slugify(proposed_page_raw)
-    if not proposed_page or proposed_page in _INVALID_SLUGS:
-        proposed_page = _slugify(note.title)
-    if not proposed_page or proposed_page in _INVALID_SLUGS:
+    proposed_page = slugify(proposed_page_raw)
+    if is_placeholder(proposed_page):
+        proposed_page = slugify(note.title)
+    if is_placeholder(proposed_page):
         raise ValueError(f"LLM returned invalid slug {proposed_page_raw!r} and note title also unusable")
+    proposed_page = strip_domain_suffix(proposed_page, domain)
 
     is_new_page = bool(data.get("is_new_page", True))
     link_only = bool(data.get("link_only", False))
@@ -255,7 +249,7 @@ def generate_proposal(note: NoteRecord, domain: str) -> Optional[Proposal]:
     valid_links = []
     stripped = 0
     for link in raw_links:
-        link = _slugify(str(link))
+        link = slugify(str(link))
         if link and link != proposed_page and slug_exists_in_index(domain, link):
             valid_links.append(link)
         else:
