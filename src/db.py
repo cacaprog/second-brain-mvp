@@ -223,6 +223,14 @@ class DB:
                 (_now(), wiki_page),
             )
 
+    def rename_wiki_page(self, old_slug: str, new_slug: str) -> None:
+        """Repoint every note's wiki_page from old_slug to new_slug (a page rename)."""
+        with self._conn() as conn:
+            conn.execute(
+                "UPDATE notes SET wiki_page=?, modified_at=? WHERE wiki_page=?",
+                (new_slug, _now(), old_slug),
+            )
+
     def set_note_domain(
         self,
         note_id: str,
@@ -261,6 +269,16 @@ class DB:
                     proposal.rejection_reason, proposal.decided_at,
                     proposal.edited_content,
                 ),
+            )
+
+    def update_proposed_page(self, proposal_id: str, proposed_page: str) -> None:
+        """Update a pending proposal's target slug — used to regenerate slugs
+        for proposals created before a slug-quality fix, without redoing
+        classification or summarization."""
+        with self._conn() as conn:
+            conn.execute(
+                "UPDATE proposals SET proposed_page=? WHERE id=?",
+                (proposed_page, proposal_id),
             )
 
     def get_proposal(self, proposal_id: str) -> Optional[Proposal]:

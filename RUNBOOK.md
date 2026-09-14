@@ -647,11 +647,37 @@ git -C wiki/ add -A
 git -C wiki/ commit -m "maintenance: clean and merge wiki pages"
 ```
 
-### Rename a wiki page slug
+### Bulk clean up bad slugs across the wiki
 
-Use this when a slug was generated with stripped accents (e.g. `caracterstica`,
-`automao`) or is simply too long. The command updates the file, domain index,
-cross-links, all back-references, and creates a git commit atomically.
+Use this to sweep the whole wiki for low-quality slugs — mid-word truncation,
+sentence-length slugs, `--` punctuation artifacts, or a domain name accidentally
+baked into the slug — and re-slug them in one pass. It re-evaluates every page
+(skipping `domains/queries/`, whose slugs are query-text by design), regenerates
+a concept-based replacement for flagged pages, and applies the rename atomically
+across the wiki file, domain index, cross-links, SQLite (`notes.wiki_page`), and
+ChromaDB together.
+
+```bash
+# 1. Preview — read-only, no writes, shows old → new slug and why
+uv run python src/slug_migrator.py detect
+
+# 2. Apply — writes everywhere at once; --dry-run does a full run with no writes
+uv run python src/slug_migrator.py apply --dry-run
+uv run python src/slug_migrator.py apply
+
+# Limit either command to a single page while testing
+uv run python src/slug_migrator.py detect --path wiki/domains/career/some-slug.md
+```
+
+Re-running `detect`/`apply` after an interrupted run is safe — pages already
+renamed are recognized from the wiki's own `rename:` commit history and skipped.
+
+### Rename a single wiki page slug manually
+
+Use this for a one-off rename that isn't about slug *quality* (e.g. a slug was
+generated with stripped accents like `caracterstica` instead of `caracteristica`).
+The command updates the file, domain index, cross-links, and all back-references,
+and creates a git commit atomically — but it only touches the wiki's own git repo.
 
 ```bash
 uv run python src/wiki_store.py rename <domain> <old-slug> <new-slug>
@@ -664,20 +690,18 @@ uv run python src/wiki_store.py rename mental-model automao automacao
 uv run python src/wiki_store.py rename philosophy um-slug-muito-longo-aqui slug-curto
 ```
 
-After renaming, sync SQLite and ChromaDB:
+After a manual rename, sync SQLite yourself (there is no standalone ChromaDB
+re-index CLI — re-run ingestion or the bulk migration above if the embedding
+also needs to move):
 ```bash
-# Update the DB reference (replace values as needed)
 sqlite3 db/brain.sqlite \
   "UPDATE notes SET wiki_page='<new-slug>' WHERE wiki_page='<old-slug>';"
-
-# Re-index in ChromaDB
-uv run python src/vector_store.py --reindex-slug <domain> <new-slug>
 ```
 
 **Slug rules** (applied automatically to all new proposals):
-- 1–4 words, lowercase-hyphenated
-- Max 40 characters
+- 1–4 words, lowercase-hyphenated, truncated on word boundaries (never mid-word)
 - Accented characters transliterated: `ã→a`, `ç→c`, `ê→e`, `ó→o`, etc.
+- The note's own domain name is stripped if the model appends it to the slug
 
 ### MCP server (for Claude Code integration)
 
